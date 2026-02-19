@@ -13,18 +13,38 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ isEnableSong }) => {
     const audioRef = useRef<HTMLAudioElement>(null);
 
     useEffect(() => {
-        isEnableSong && togglePlay();
-    }, [isEnableSong])
+        if (!audioRef.current) return;
+
+        if (isEnableSong) {
+            audioRef.current
+                .play()
+                .then(() => setIsPlaying(true))
+                .catch(() => {
+                    setIsPlaying(false);
+                });
+            return;
+        }
+
+        audioRef.current.pause();
+        setIsPlaying(false);
+    }, [isEnableSong]);
 
     const togglePlay = () => {
-        if (audioRef.current) {
-            if (isPlaying) {
-                audioRef.current.pause();
-            } else {
-                audioRef.current.play();
+        if (!audioRef.current) return;
+
+        setIsPlaying((prevIsPlaying) => {
+            if (prevIsPlaying) {
+                audioRef.current?.pause();
+                return false;
             }
-            setIsPlaying(!isPlaying);
-        }
+
+            audioRef.current
+                ?.play()
+                .catch(() => {
+                    setIsPlaying(false);
+                });
+            return true;
+        });
     };
 
     return (
