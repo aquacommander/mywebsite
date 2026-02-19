@@ -1,0 +1,25 @@
+{
+  "short_name": "Ocat Portfolio",
+  "name": "Emmanuel Ocat",
+  "icons": [
+    {
+      "src": "mark.jpg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "mark.jpg",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "mark.jpg",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
