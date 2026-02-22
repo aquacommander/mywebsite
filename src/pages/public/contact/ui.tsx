@@ -16,20 +16,15 @@ interface ContactPageUIProps {
 
 const ContactInfo = ({ handleCopyText }: { handleCopyText: (text: string) => void }) => (
     <>
-        <a href="mailto:emmanuelsuyama@gmail.com" rel="noreferrer">
-            <Icon icon={'email'} />
-        </a>
-        <a href="https://www.linkedin.com/in/emmanuelocat" target="_blank" rel="noreferrer">
+        <a href="https://www.linkedin.com/in/" target="_blank" rel="noreferrer">
             <Icon icon={'linkedin'} />
+        </a>
+        <a href="mailto:luckybit0512@gmail.com" rel="noreferrer">
+            <Icon icon={'email'} />
         </a>
         <a href="https://t.me/angel_10_04" target="_blank" rel="noreferrer">
             <Icon icon={'telegram'} />
         </a>
-        <Tooltip label="Click to Copy Number" hasArrow placement='top-start' shouldWrapChildren>
-            <Flex onClick={() => handleCopyText('+09939645152')} $style={{ cursor: "pointer" }}>
-                <Icon icon={'phone'} />
-            </Flex>
-        </Tooltip>
         <Tooltip label="Click to Copy Username" hasArrow placement='top-start' shouldWrapChildren>
             <Flex onClick={() => handleCopyText('today.just')} $style={{ cursor: "pointer" }}>
                 <Icon icon={'discord'} />
@@ -49,12 +44,12 @@ export default function ContactPageUI({ handleCopyText, menu, followOcat, loadin
                     <Flex $style={ContactStyles.ImageWrapperStyle}>
                         <Image
                             src={constantImages.Avatar}
-                            alt="Emmanuel Ocat avatar"
+                            alt="Suyama Keiichiro avatar"
                             style={{ borderRadius: "100%", maxWidth: "10rem" }}
                         />
                     </Flex>
                     <Flex $style={ContactStyles.CardInfoWrapperStyle}>
-                        <Span $style={{ size: "2rem" }}>Emmanuel Ocat</Span>
+                        <Span $style={{ size: "2rem" }}>Suyama Keiichiro</Span>
                         <Span $style={{ color: "color-4" }}>Senior Software Engineer</Span>
                     </Flex>
                     <Flex $style={{ gap: "1rem", mb: "2rem" }}>

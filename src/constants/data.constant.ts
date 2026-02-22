@@ -2,7 +2,7 @@ import configs from "configs"
 import constantImages from "./img.constant"
 
 const HOME_DATA = {
-    Title: 'Welcome to Emmanuel Ocat',
+    Title: 'Welcome to Suyama Keiichiro',
     Content: 'Where you are is a result of who you were, but where you go depends entirely on who you choose to be.'
 }
 
@@ -374,13 +374,13 @@ const OVERVIEW_DATA = {
     ],
     COLORS: ['#f44336', '#8a4af3', '#2196f3', '#009688', '#FA6800', '#795548', '#ffeb3b', '#8bc34a', '#cddc39', '#f44336'],
     PERSONAL_DATA: {
-        NAME: 'Emmanuel Ocat',
-        USERNAME: 'Ocat',
+        NAME: 'Suyama Keiichiro',
+        USERNAME: 'Suyama',
         PRONOUNCE: 'He/Him',
         INFORMATION: [
             {
                 icon: 'location',
-                value: 'Makati, Philippines',
+                value: 'Tawaramoto, Nara, Japan',
                 link: '#'
             },
             {
@@ -394,50 +394,34 @@ const OVERVIEW_DATA = {
         {
             id: 'education',
             period: '04/2010 – 03/2014',
-            label: 'Bachelor of Information Technology and Business',
-            company: 'Cyber University',
+            label: 'Bachelor of Engineering (Computer Science)',
+            company: 'The University of Tokyo',
             color: '#6B7280',
-            location: 'Fukuoka, Japan',
+            location: 'Tokyo, Japan',
             locationFlag: '🇯🇵',
             icon: '📚',
-            focus: 'Foundation',
+            focus: 'Computer science foundation for distributed systems engineering',
             impacts: [
-                'Specialized in software engineering and algorithms',
-                'Thesis on distributed systems',
+                'Built a strong base in software engineering, algorithms, and system design',
+                'Completed formal training in computer science at one of Japan\'s top universities',
             ],
-            techStack: ['C', 'Java', 'Python'],
-        },
-        {
-            id: 'yokogawa',
-            period: '06/2014 – 07/2015 (~1 year)',
-            label: 'Sales Engineer',
-            company: 'Yokogawa Philippines, Inc.',
-            color: '#F59E0B',
-            location: 'Manila, Philippines',
-            locationFlag: '🇵🇭',
-            icon: '🛰️',
-            focus: 'Technical sales engineering and industrial automation',
-            impacts: [
-                'Led field wireless, software, and controller solution presentations',
-                'Delivered installations, commissioning, and hands-on client technical support',
-            ],
-            techStack: ['Industrial Automation', 'Field Wireless', 'Controllers'],
+            techStack: ['Computer Science', 'Algorithms', 'Distributed Systems'],
         },
         {
             id: 'hacobu',
-            period: '09/2015 – 11/2019 (~4 years)',
+            period: '09/2014 – 11/2019 (~5 years)',
             label: 'Full Stack Developer',
             company: '株式会社Hacobu',
             color: '#10B981',
             location: 'Tokyo, Japan – Remote',
             locationFlag: '🇯🇵',
             icon: '💻',
-            focus: 'Full-stack SaaS ownership and engineering foundations',
+            focus: 'Full-stack SaaS ownership and scalable logistics platform delivery',
             impacts: [
-                'Owned logistics SaaS features end-to-end from concept to production',
-                'Improved performance through schema redesign, indexing, and large-scale refactoring',
+                'Owned core logistics SaaS features from concept to production for enterprise and SME customers',
+                'Improved performance through schema redesign, query optimization, indexing, and large-scale refactoring',
             ],
-            techStack: ['Ruby on Rails', 'JavaScript', 'HTML/CSS', 'REST API'],
+            techStack: ['Ruby on Rails', 'JavaScript', 'HTML', 'CSS', 'REST API'],
         },
         {
             id: 'delivery-hero',
@@ -450,8 +434,8 @@ const OVERVIEW_DATA = {
             icon: '⚙️',
             focus: 'High-concurrency global backend platforms',
             impacts: [
-                'Built and optimized backend services and APIs used across 40+ countries',
-                'Increased stability and throughput via tuning, refactoring, and observability',
+                'Designed high-concurrency backend services for ads, premium placements, and analytics at global scale',
+                'Boosted stability, throughput, and cost-efficiency through performance tuning and refactoring',
             ],
             techStack: ['Python', 'Scala', 'PHP', 'Docker', 'Kubernetes', 'AWS', 'GCP'],
         },
@@ -466,10 +450,10 @@ const OVERVIEW_DATA = {
             icon: '🤖',
             focus: 'LLM-powered underwriting and agentic automation',
             impacts: [
-                'Designed agentic workflows for intake, triage, quote generation, and decision support',
-                'Led model evaluation, benchmarking, drift, and regression monitoring systems',
+                'Built LLM-powered agentic workflows for intake, triage, quote generation, and underwriting decision support',
+                'Led production evaluation and monitoring across accuracy, latency, drift, and regressions',
             ],
-            techStack: ['LLM', 'PyTorch', 'LangChain', 'CrewAI', 'MLOps'],
+            techStack: ['LLM', 'PyTorch', 'LangChain', 'CrewAI', 'MLOps', 'Data Engineering'],
         },
     ],
     CAREER_TIMELINE_DATA: [
@@ -478,43 +462,24 @@ const OVERVIEW_DATA = {
             type: 'education' as const,
             label: 'B.Eng. Computer Science – The University of Tokyo',
             startYear: 2010,
-            startMonth: 1,
+            startMonth: 4,
             endYear: 2014,
-            endMonth: 6,
+            endMonth: 3,
             color: '#6b7280',
             location: 'Tokyo, Japan',
             locationFlag: '🇯🇵',
             achievements: [
-                'Specialized in software engineering and algorithms',
-                'Thesis on distributed systems',
+                'Built foundations in software engineering, algorithms, and systems',
+                'Completed B.Eng. in Computer Science',
             ],
-            techStack: ['C', 'Java', 'Python'],
-        },
-        {
-            id: 'yokogawa',
-            type: 'role' as const,
-            label: 'Sales Engineer – Yokogawa',
-            company: 'Yokogawa Philippines, Inc.',
-            startYear: 2014,
-            startMonth: 6,
-            endYear: 2015,
-            endMonth: 7,
-            color: '#F59E0B',
-            location: 'Manila, Philippines',
-            locationFlag: '🇵🇭',
-            achievements: [
-                'Handled technical proposals and client-facing product presentations',
-                'Executed installations and commissioning for field wireless solutions',
-                'Provided post-sales technical support for software and controllers',
-            ],
-            techStack: ['Industrial Automation', 'Field Wireless', 'Controllers'],
+            techStack: ['Computer Science', 'Algorithms', 'Distributed Systems'],
         },
         {
             id: 'hacobu',
             type: 'role' as const,
             label: 'Full Stack Developer – Hacobu',
             company: '株式会社Hacobu',
-            startYear: 2015,
+            startYear: 2014,
             startMonth: 9,
             endYear: 2019,
             endMonth: 11,
@@ -522,11 +487,11 @@ const OVERVIEW_DATA = {
             location: 'Tokyo, Japan – Remote',
             locationFlag: '🇯🇵',
             achievements: [
-                'Owned full-stack logistics SaaS features from planning to production',
-                'Improved database and query performance through schema and indexing redesign',
-                'Established development standards and mentored growing engineering teams',
+                'Led full-stack development of logistics SaaS features from concept to production',
+                'Improved performance through schema redesign, indexing, query optimization, and refactoring',
+                'Established workflows and engineering standards while mentoring junior engineers',
             ],
-            techStack: ['Ruby on Rails', 'JavaScript', 'HTML/CSS', 'REST API'],
+            techStack: ['Ruby on Rails', 'JavaScript', 'HTML', 'CSS', 'REST API'],
         },
         {
             id: 'delivery-hero',
@@ -541,9 +506,9 @@ const OVERVIEW_DATA = {
             location: 'Berlin, Germany – Remote',
             locationFlag: '🇩🇪',
             achievements: [
-                'Designed high-concurrency services for ads, placements, and analytics products',
-                'Improved stability, throughput, and cost-efficiency via optimization and refactoring',
-                'Operated services with Docker and Kubernetes across AWS and GCP',
+                'Designed high-concurrency services for ads, placements, and analytics used across 40+ countries',
+                'Improved stability, throughput, and cost-efficiency through optimization and refactoring',
+                'Operated microservices with Docker and Kubernetes across AWS and GCP',
             ],
             techStack: ['Python', 'Scala', 'PHP', 'Docker', 'Kubernetes', 'AWS', 'GCP'],
         },
@@ -561,10 +526,10 @@ const OVERVIEW_DATA = {
             locationFlag: '🇺🇸',
             achievements: [
                 'Built LLM-powered agentic workflows for underwriting intake, triage, and quote generation',
-                'Created production evaluation and monitoring for drift, latency, and regressions',
-                'Defined guardrails for safe, explainable autonomous decision-support behavior',
+                'Created production evaluation and monitoring for accuracy, drift, latency, and regressions',
+                'Defined guardrails for safe, explainable autonomous decision support in regulated domains',
             ],
-            techStack: ['LLM', 'PyTorch', 'LangChain', 'CrewAI', 'MLOps'],
+            techStack: ['LLM', 'PyTorch', 'LangChain', 'CrewAI', 'MLOps', 'Data Engineering'],
         },
     ],
     AGGREGATE_DATA: [
@@ -581,7 +546,7 @@ const OVERVIEW_DATA = {
         {
             icon: 'github',
             value: 'Repositories',
-            count: '75'
+            count: '79'
         },
         {
             icon: 'good',

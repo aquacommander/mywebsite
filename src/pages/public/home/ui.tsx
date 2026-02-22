@@ -15,7 +15,7 @@ interface HomePageUIProps {
 const AvatarImage = () => (
     <Image
         src={constantImages.Avatar}
-        alt="Emmanuel Ocat avatar"
+        alt="Suyama Keiichiro avatar"
         style={{
             borderRadius: "100%",
             maxWidth: "15rem"
