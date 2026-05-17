@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { HStack, Image } from '@chakra-ui/react'
+import { HStack } from '@chakra-ui/react'
 
 import Flex from "components/basic/flex";
 import { Span } from "components/basic/text";

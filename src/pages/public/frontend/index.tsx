@@ -1,5 +1,5 @@
 import Flex from "components/basic/flex"
-import { HStack, Image } from '@chakra-ui/react'
+import { HStack } from '@chakra-ui/react'
 
 import { Span } from "components/basic/text";
 import constantData from "constants/data.constant";
