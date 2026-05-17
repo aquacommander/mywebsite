@@ -135,13 +135,15 @@ function App() {
           )}
         </div>
       ) : (
-        <div className="portfolio-shell">
-          <Provider store={store}>
-            <RouterProvider router={mainRouter} />
-          </Provider>
-          {/* Audio kept but disabled by default, and no popup */}
-          <AudioPlayer isEnableSong={false} />
-        </div>
+        <>
+          <div className="portfolio-shell">
+            <Provider store={store}>
+              <RouterProvider router={mainRouter} />
+            </Provider>
+          </div>
+          {/* Audio player rendered at root level — always on top, never clipped */}
+          <AudioPlayer />
+        </>
       )}
     </div>
   );

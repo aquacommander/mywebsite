@@ -2,40 +2,64 @@ import constantImages from "constants/img.constant"
 import Link from "components/basic/link"
 import constantData from "constants/data.constant"
 import HomeStyles from "style/home.style"
-import { ScaleAnime, FadeAnime } from "components/custom/animation"
+import { FadeAnime } from "components/custom/animation"
 import { OverlayStyle } from "style/global.style"
 import { HStack, Image, VStack } from '@chakra-ui/react'
 import { Text } from "@chakra-ui/react"
 import styled from "styled-components"
+import { ScaleAnimeStyle } from "components/custom/animation/animation.style"
 
 interface HomePageUIProps {
     menu: boolean
 }
 
-const AvatarImage = () => (
-    <Image
+const AvatarImage = styled(Image)`
+    border-radius: 100%;
+    max-width: 15rem;
+    width: 15rem;
+
+    @media (max-width: 768px) {
+        max-width: 7.5rem;
+        width: 7.5rem;
+    }
+`;
+
+const AvatarSection = () => (
+    <AvatarImage
         src={constantImages.Avatar}
         alt="Suyama Keiichiro avatar"
-        style={{
-            borderRadius: "100%",
-            maxWidth: "15rem"
-        }}
     />
 );
 
+/** Overrides ScaleAnimeStyle to force center alignment and proper mobile wrapping */
+const TitleHeading = styled(ScaleAnimeStyle)`
+    text-align: center !important;
+    width: 100%;
+    padding: 0 1.25rem;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-height: 1.2;
+
+    /* Ensure each FadeAnime span also centers */
+    span, [class*="FadeAnime"] {
+        display: inline;
+    }
+`;
+
 const TitleContent = () => (
-    <VStack>
-        <ScaleAnime level={1}>
+    <VStack style={{ width: "100%", alignItems: "center" }}>
+        <TitleHeading as="h1" level={1}>
             <FadeAnime $style={{ fontFamily: "Ocat" }}>
                 {constantData.HOME_DATA.Title}
             </FadeAnime>
-        </ScaleAnime>
+        </TitleHeading>
         <Text
             as="div"
             style={{
                 textAlign: "center",
                 maxWidth: "30rem",
-                fontSize: "1.15rem"
+                fontSize: "1.15rem",
+                padding: "0 1.5rem"
             }}
         >
             <FadeAnime>
@@ -59,7 +83,7 @@ export default function HomePageUI({ menu }: HomePageUIProps) {
     return (
         <VStack style={HomeStyles.HomeContainerStyle}>
             <VStack style={HomeStyles.ContentContainerStyle}>
-                <AvatarImage />
+                <AvatarSection />
                 <TitleContent />
                 <NavLinks />
             </VStack>

@@ -6,12 +6,15 @@ const HomeContainerStyle = {
     backgroundPosition: "center",
     backgroundSize: "cover",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    width: "100%",
 }
 
 const ContentContainerStyle = {
     gap: "3rem",
     zIndex: "10",
+    width: "100%",
+    alignItems: "center",
 }
 
 const HomeStyles = {

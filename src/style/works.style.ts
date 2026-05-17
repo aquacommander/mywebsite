@@ -1,35 +1,18 @@
 import Flex from "components/basic/flex"
 import { InlineFlexPropsType } from "components/basic/flex/style"
-import { InlineGridPropsType } from "components/basic/grid/style"
 import constantImages from "constants/img.constant"
 import styled from "styled-components"
 
 export const ScrollableWorkContainer = styled.div`
-    min-height: 100vh;
-    height: 100%;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
     overflow-y: auto;
     overflow-x: hidden;
-    width: 100%;
     -webkit-overflow-scrolling: touch;
 
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-    -ms-overflow-style: scrollbar;
-
-    &::-webkit-scrollbar {
-        width: 8px;
-    }
-    &::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.2);
-        border-radius: 4px;
-    }
-    &::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 4px;
-    }
-    &::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.5);
-    }
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
 `
 
 const WorkContainerStyle: InlineFlexPropsType = {
@@ -59,18 +42,10 @@ const TitleWrapperStyle: InlineFlexPropsType = {
     p: "2rem 0",
 }
 
-const GridWrapperStyle: InlineGridPropsType = {
-    columns: '3',
-    gap: "5rem",
-    zIndex: "10",
-    position: "relative"
-}
-
 const WorkStyles = {
     WorkContainerStyle,
     FrontendWrapperStyle,
     TitleWrapperStyle,
-    GridWrapperStyle
 }
 
 export const FrontendWrapper = styled(Flex)`
@@ -90,6 +65,28 @@ export const AIWrapper = styled(FrontendWrapper)`
     max-width: 17rem;
 `
 
+/**
+ * Desktop: single horizontal row, cards side by side.
+ * Mobile: vertical column, centered, scrollable.
+ */
+export const CardsRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    z-index: 10;
+    position: relative;
+    padding: 2rem 1rem;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 1.8rem;
+        width: 100%;
+        padding: 4.5rem 0 2.5rem;
+    }
+`
+
 export const CardWrapper = styled(Flex)`
     position: relative;
     perspective: 2500px;
@@ -97,12 +94,22 @@ export const CardWrapper = styled(Flex)`
     justify-content: center;
     align-items: flex-end;
     cursor: pointer;
-    width:100vw;
-    max-width:20rem;
-    min-height: 29rem;
-    
-    @media screen and (max-width:400px) {
-        max-width:100%;
+
+    /*
+     * Portrait aspect ratio drives height from width automatically —
+     * no hardcoded px/rem heights needed on any device.
+     * Desktop: fixed width, ratio gives the height.
+     * Mobile: vw-based width, same ratio scales height proportionally.
+     */
+    aspect-ratio: 3 / 4;
+
+    /* Desktop */
+    width: 18rem;
+
+    /* Mobile: vw-based width with a max-width cap so it never gets too large */
+    @media (max-width: 768px) {
+        width: 52vw;
+        max-width: 16rem;
     }
 
     h3 {
@@ -128,9 +135,9 @@ export const CardWrapper = styled(Flex)`
             background-image: linear-gradient(
                 to top,
                 transparent 46%,
-            rgba(12, 13, 19, 0.5) 68%,
+                rgba(12, 13, 19, 0.5) 68%,
                 rgba(12, 13, 19, .8) 97%
-            );    
+            );
         }
         &::after {
             bottom: 0;
@@ -156,7 +163,6 @@ export const CardWrapper = styled(Flex)`
             }
         }
 
-
         h3 {
             transform: translate3d(0%, -1rem, 100px);
         }
@@ -168,7 +174,6 @@ export const CardWrapper = styled(Flex)`
             }
         }
     }
-
 `
 
 export default WorkStyles

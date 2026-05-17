@@ -45,7 +45,9 @@ export const OverlayStyle = (menu: boolean, opacity?: number) => ({
 	zIndex: "5",
 	transition: 'background .3s',
 	top: "0",
-	position:'fixed'
+	position: 'fixed',
+	// Never intercept clicks — this is a purely visual dim layer
+	pointerEvents: 'none' as const,
 });
 
 

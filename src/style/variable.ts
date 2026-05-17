@@ -28,7 +28,7 @@ const variables = {
 
 export const smVariables = {
     'font-size': '12px',
-    'font-size-1': '2.28rem',
+    'font-size-1': '1.9rem',
     'font-size-2': '1.58rem',
     'font-size-3': '0.75rem',
     'font-size-4': '1rem',

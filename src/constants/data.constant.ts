@@ -546,7 +546,7 @@ const OVERVIEW_DATA = {
         {
             icon: 'github',
             value: 'Repositories',
-            count: '79'
+            count: '104'
         },
         {
             icon: 'good',

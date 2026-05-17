@@ -10,6 +10,9 @@ const FrontendWrapperStyle: InlineFlexPropsType = {
     background: `url(${constantImages.BG6})`,
     position: "relative",
     w: "100%",
+    // "auto" on mobile intercepts touch events before the inner scroll row can receive them.
+    // Keep auto for desktop (allows page-level scroll if content overflows),
+    // but override to hidden on mobile via the styled wrapper below.
     overflow: "auto",
     vAlign: "center",
     hAlign: "center",
@@ -113,6 +116,30 @@ export const CardWrapper = styled(Flex)`
         }
 
         transform: scale(1.03);
+    }
+`
+
+/**
+ * Wraps the project pages on mobile.
+ * overflow:hidden prevents the outer container from stealing touch events
+ * so the inner HorizontalScrollRow can receive horizontal swipe gestures.
+ */
+export const ProjectPageMobileWrapper = styled.div`
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    @media (max-width: 768px) {
+        /* Allow vertical scroll for stacked cards */
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 100dvh;
+        height: 100vh;
+        -webkit-overflow-scrolling: touch;
+        align-items: flex-start;
     }
 `
 

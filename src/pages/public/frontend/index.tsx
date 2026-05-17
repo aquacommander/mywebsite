@@ -5,8 +5,8 @@ import { Span } from "components/basic/text";
 import constantData from "constants/data.constant";
 import { useSelector } from "react-redux";
 import { useDragToScroll } from "hooks/useDragToScroll";
-import FrontendStyles from "style/frontend.style";
-import AIStyles, { AICardWrapper, CardItemWrapper, HorizontalScrollRow, ProjectTag } from "style/ai.style";
+import FrontendStyles, { ProjectPageMobileWrapper } from "style/frontend.style";
+import AIStyles, { AICardWrapper, CardImage, CardItemWrapper, HorizontalScrollRow, ProjectTag } from "style/ai.style";
 import { OverlayStyle } from "style/global.style";
 import BackButton from "components/custom/back-button";
 
@@ -22,14 +22,9 @@ const FrontendProjectPage = () => {
         <CardItemWrapper key={item.name}>
             <a href={item.link} rel="noreferrer" target="_blank" style={{ display: "block", height: "100%" }}>
                 <AICardWrapper>
-                <Image
+                <CardImage
                     src={item.image}
                     alt={item.name}
-                    style={{
-                        width: "100%",
-                        height: "10rem",
-                        objectFit: "cover"
-                    }}
                 />
                 <Flex $style={AIStyles.AICardContentStyle}>
                     <Flex $style={AIStyles.AITagsWrapperStyle}>
@@ -48,26 +43,26 @@ const FrontendProjectPage = () => {
     );
 
     return (
-        <Flex $style={FrontendStyles.FrontendWrapperStyle}>
-            <BackButton />
+        <ProjectPageMobileWrapper>
             <Flex $style={{
-                ...FrontendStyles.ContentWrapperStyle,
-                queries: {
-                    1024: {
-                        h: "100%"
-                    }
-                }
+                ...FrontendStyles.FrontendWrapperStyle,
+                queries: { 768: { overflow: "auto" } }
             }}>
-                <HorizontalScrollRow ref={dragScrollRef}>
-                    {constantData.FRONTEND_DATA.map(renderProjectCard)}
-                </HorizontalScrollRow>
+                <BackButton />
+                <Flex $style={{
+                    ...FrontendStyles.ContentWrapperStyle,
+                    queries: { 1024: { h: "100%" } }
+                }}>
+                    <HorizontalScrollRow ref={dragScrollRef}>
+                        {constantData.FRONTEND_DATA.map(renderProjectCard)}
+                    </HorizontalScrollRow>
+                </Flex>
+                <HStack style={{
+                    ...OverlayStyle(menu, .7),
+                    position: "fixed"
+                }} />
             </Flex>
-            <HStack style={{
-                ...OverlayStyle(menu, .7),
-                position: "fixed"
-            }} />
-
-        </Flex>
+        </ProjectPageMobileWrapper>
     )
 }
 

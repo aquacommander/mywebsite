@@ -49,15 +49,32 @@ export const AICardWrapper = styled.div`
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, border-color 0.3s ease-out;
     width: 100%;
     height: 100%;
-    min-height: 22rem;
-    min-width: 18rem;
-    flex-shrink: 0;
     border: 2px solid transparent;
 
     &:hover {
-        transform: scale(1.08);
+        transform: scale(1.05);
         box-shadow: 0 12px 32px rgba(0,0,0,0.4);
         border-color: rgba(255,255,255,0.2);
+    }
+
+    @media (max-width: 768px) {
+        &:hover { transform: none; }
+        &:active { border-color: rgba(255,255,255,0.2); }
+    }
+`
+
+/** Card image — fixed height on desktop, taller on mobile to balance the wider card */
+export const CardImage = styled.img`
+    width: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+    /* Desktop: compact */
+    height: 10rem;
+
+    @media (max-width: 768px) {
+        /* Mobile: ~55% of card width (88vw) gives a balanced portrait feel */
+        height: 48vw;
+        max-height: 14rem;
     }
 `
 
@@ -68,59 +85,46 @@ export const HorizontalScrollRow = styled.div`
     overflow-x: auto;
     overflow-y: hidden;
     gap: 1.5rem;
-    padding: 1rem;
+    padding: 1rem 2rem;
     width: 100%;
     max-width: 100%;
     align-items: stretch;
+    justify-content: safe center;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     cursor: grab;
 
     scrollbar-width: none;
     -ms-overflow-style: none;
-    &::-webkit-scrollbar {
-        display: none;
-    }
+    &::-webkit-scrollbar { display: none; }
 
+    /* Under 769px: vertical stack, one card per row, centered */
     @media (max-width: 768px) {
         flex-direction: column;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         overflow-x: hidden;
-        overflow-y: auto;
-        max-height: calc(100vh - 8rem);
+        overflow-y: visible;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1.5rem;
+        padding: 1rem 1.5rem 2rem;
         cursor: default;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-        -ms-overflow-style: scrollbar;
-
-        &::-webkit-scrollbar {
-            display: block;
-            width: 8px;
-        }
-        &::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 4px;
-        }
-        &::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
-        }
-        &::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
+        width: 100%;
     }
 `
 
 export const CardItemWrapper = styled.div`
     flex-shrink: 0;
-    min-width: 18rem;
-    max-width: 20rem;
+    /* Desktop: fixed width, height grows naturally with content */
     width: 18rem;
+    min-width: 18rem;
+    max-width: 18rem;
 
+    /* Under 769px: full-width centered card like the reference image */
     @media (max-width: 768px) {
-        min-width: 100%;
-        max-width: 100%;
-        width: 100%;
+        width: 88vw;
+        min-width: unset;
+        max-width: 26rem;
     }
 `
 
