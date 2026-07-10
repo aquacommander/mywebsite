@@ -10,7 +10,7 @@ import { useToast } from "@chakra-ui/react";
 // or set REACT_APP_CALENDAR_BOOKING_URL in your .env file.
 const CALENDAR_BOOKING_URL =
     process.env.REACT_APP_CALENDAR_BOOKING_URL ||
-    'https://calendar.app.google/REPLACE_WITH_YOUR_BOOKING_LINK';
+    'https://calendar.app.google/h3rfJHZ1Bbfehpyn6';
 
 const EMPTY_FORM = { name: '', email: '', message: '' };
 
