@@ -51,6 +51,61 @@ const requestFollowApi = async (path: '/api/follow' | '/api/get'): Promise<Follo
     }
 };
 
+// --- Contact message (Web3Forms) ---------------------------------------
+// Create a free access key at https://web3forms.com using luckybit0512@gmail.com
+// as the destination inbox, then set REACT_APP_WEB3FORMS_KEY in your .env file.
+const WEB3FORMS_ACCESS_KEY = process.env.REACT_APP_WEB3FORMS_KEY || '';
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+
+type SendMessagePayload = {
+    name: string;
+    email: string;
+    message: string;
+};
+
+const sendMessage = async ({ name, email, message }: SendMessagePayload) => {
+    if (!WEB3FORMS_ACCESS_KEY) {
+        return {
+            error: true,
+            message: 'Message service is not configured yet. Please email me directly.',
+        };
+    }
+
+    try {
+        // Submit as URL-encoded form data (a CORS "simple" request) so the
+        // browser does not fire a pre-flight OPTIONS that Web3Forms rejects.
+        const body = new URLSearchParams({
+            access_key: WEB3FORMS_ACCESS_KEY,
+            subject: `New portfolio message from ${name}`,
+            from_name: name,
+            name,
+            email,
+            message,
+            replyto: email,
+        });
+
+        const res = await fetch(WEB3FORMS_ENDPOINT, {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body,
+        });
+
+        const data = await res.json().catch(() => ({} as any));
+        const success = res.ok && Boolean(data.success);
+        return {
+            error: !success,
+            message: success
+                ? 'Thanks! Your message has been sent.'
+                : (data.message || 'Unable to send your message. Please try again.'),
+        };
+    } catch {
+        return {
+            error: true,
+            message: 'Message service is currently unavailable. Please try again later.',
+        };
+    }
+};
+
 const followOcat = async () => {
     const response = await requestFollowApi('/api/follow');
     return {
@@ -70,7 +125,8 @@ const getFollows = async () => {
 
 const apis = {
     followOcat,
-    getFollows
+    getFollows,
+    sendMessage
 }
 
 export default apis;

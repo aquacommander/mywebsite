@@ -4,37 +4,62 @@ import { Span } from "components/basic/text";
 import constantImages from "constants/img.constant";
 import ContactStyles from "style/contact.style";
 import { OverlayStyle } from "style/global.style";
-import { Button, HStack, Image, Tooltip } from '@chakra-ui/react'
+import { Button, HStack, Image, Input, Textarea } from '@chakra-ui/react'
 import BackButton from "components/custom/back-button";
 import styled from "styled-components";
 
+type ContactForm = { name: string; email: string; message: string };
+
 interface ContactPageUIProps {
-    handleCopyText: (text: string) => void;
     followOcat: () => void;
     menu: boolean;
     loading: boolean;
+    form: ContactForm;
+    sending: boolean;
+    handleFormChange: (field: keyof ContactForm, value: string) => void;
+    handleSendMessage: () => void;
+    bookMeeting: () => void;
 }
 
-const ContactInfo = ({ handleCopyText }: { handleCopyText: (text: string) => void }) => (
+const ContactInfo = () => (
     <>
-        <a href="https://x.com/SuyamaKeiichiro" target="_blank" rel="noreferrer">
-            <Icon icon={'twitter'} />
+        <a href="https://www.instagram.com/suyamakeiichiro" target="_blank" rel="noreferrer">
+            <Icon icon={'instagram'} />
         </a>
-        <a href="mailto:luckybit0512@gmail.com" rel="noreferrer">
-            <Icon icon={'email'} />
+        <a href="https://www.reddit.com/user/benselinmisim3/" target="_blank" rel="noreferrer">
+            <Icon icon={'reddit'} />
         </a>
         <a href="https://t.me/angel_10_04" target="_blank" rel="noreferrer">
             <Icon icon={'telegram'} />
         </a>
-        <Tooltip label="Click to Copy Username" hasArrow placement='top-start' shouldWrapChildren>
-            <Flex onClick={() => handleCopyText('twelve.eight')} $style={{ cursor: "pointer" }}>
-                <Icon icon={'discord'} />
-            </Flex>
-        </Tooltip>
+        <a href="https://x.com/SUYAMAKEIIvuco" target="_blank" rel="noreferrer">
+            <Icon icon={'twitter'} />
+        </a>
     </>
 );
 
-export default function ContactPageUI({ handleCopyText, menu, followOcat, loading }: ContactPageUIProps) {
+export default function ContactPageUI({
+    menu,
+    followOcat,
+    loading,
+    form,
+    sending,
+    handleFormChange,
+    handleSendMessage,
+    bookMeeting,
+}: ContactPageUIProps) {
+    // Shared Chakra field styling — keeps native focus ring / hover states intact.
+    const fieldProps = {
+        bg: "#1b2026",
+        borderWidth: "1px",
+        borderColor: "#30363d",
+        color: "#e6edf3",
+        borderRadius: "0.65rem",
+        fontFamily: "var(--body-font)",
+        focusBorderColor: "#2f81f7",
+        _hover: { borderColor: "#414a54" },
+        _placeholder: { color: "#7d8590" },
+    } as const;
     return (
         <Flex $style={ContactStyles.ContactWrapperStyle}>
             <BackButton />
@@ -56,17 +81,108 @@ export default function ContactPageUI({ handleCopyText, menu, followOcat, loadin
                     <Span $style={{ color: "color-4" }}>Senior Software Engineer</Span>
 
                     <SocialRow>
-                        <ContactInfo handleCopyText={handleCopyText} />
+                        <ContactInfo />
                     </SocialRow>
 
-                    <Button style={{
-                        width: "100%",
-                        fontFamily: "var(--body-font)",
-                        background: "#32383f",
-                        color: "white"
-                    }} colorScheme='gray' onClick={followOcat} isLoading={loading}>
-                        Follow
-                    </Button>
+                    {/* Message me */}
+                    <FormPanel>
+                        <FormHeader>
+                            <FormTitle>Send me a message</FormTitle>
+                            <FormSubtitle>
+                                Tell me what you need and I&apos;ll reply to your inbox.
+                            </FormSubtitle>
+                        </FormHeader>
+
+                        <MessageForm
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                handleSendMessage();
+                            }}
+                        >
+                            <FieldGrid>
+                                <Field>
+                                    <FieldLabel>Name</FieldLabel>
+                                    <Input
+                                        placeholder="Jane Doe"
+                                        value={form.name}
+                                        onChange={(e) => handleFormChange('name', e.target.value)}
+                                        {...fieldProps}
+                                    />
+                                </Field>
+                                <Field>
+                                    <FieldLabel>Email</FieldLabel>
+                                    <Input
+                                        type="email"
+                                        placeholder="jane@email.com"
+                                        value={form.email}
+                                        onChange={(e) => handleFormChange('email', e.target.value)}
+                                        {...fieldProps}
+                                    />
+                                </Field>
+                            </FieldGrid>
+
+                            <Field>
+                                <FieldLabel>Message</FieldLabel>
+                                <Textarea
+                                    placeholder="Hi Keiichiro, I'd love your help with…"
+                                    value={form.message}
+                                    onChange={(e) => handleFormChange('message', e.target.value)}
+                                    rows={4}
+                                    resize="vertical"
+                                    {...fieldProps}
+                                />
+                            </Field>
+
+                            <Button
+                                type="submit"
+                                leftIcon={<Icon icon={'email'} width="18px" height="18px" />}
+                                width="100%"
+                                colorScheme="blue"
+                                bg="#2f81f7"
+                                _hover={{ bg: "#3a8bff" }}
+                                _active={{ bg: "#2872de" }}
+                                fontFamily="var(--body-font)"
+                                borderRadius="0.65rem"
+                                isLoading={sending}
+                                loadingText="Sending…"
+                            >
+                                Send message
+                            </Button>
+                        </MessageForm>
+                    </FormPanel>
+
+                    <SecondaryActions>
+                        {/* Book a meeting via Google Calendar */}
+                        <Button
+                            onClick={bookMeeting}
+                            leftIcon={<Icon icon={'calendar'} width="18px" height="18px" />}
+                            flex="1"
+                            variant="outline"
+                            color="#e6edf3"
+                            borderColor="#30363d"
+                            bg="transparent"
+                            _hover={{ bg: "#1b2026", borderColor: "#414a54" }}
+                            fontFamily="var(--body-font)"
+                            borderRadius="0.65rem"
+                        >
+                            Book a meeting
+                        </Button>
+
+                        <Button
+                            onClick={followOcat}
+                            isLoading={loading}
+                            flex="1"
+                            variant="outline"
+                            color="#e6edf3"
+                            borderColor="#30363d"
+                            bg="transparent"
+                            _hover={{ bg: "#1b2026", borderColor: "#414a54" }}
+                            fontFamily="var(--body-font)"
+                            borderRadius="0.65rem"
+                        >
+                            Follow
+                        </Button>
+                    </SecondaryActions>
                 </CardBody>
             </ContactCard>
 
@@ -135,6 +251,90 @@ const NameText = styled.h2`
     text-align: center;
     margin: 0.5rem 0 0.1rem;
     font-family: var(--body-font);
+`
+
+/** Message form panel — a subtle inset card that groups the whole form */
+const FormPanel = styled.div`
+    width: 100%;
+    margin: 0.5rem 0 0.9rem;
+    padding: 1.1rem;
+    background: #191d22;
+    border: 1px solid #2a2f36;
+    border-radius: 0.9rem;
+
+    @media (max-width: 480px) {
+        padding: 0.9rem;
+    }
+`
+
+const FormHeader = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-bottom: 0.9rem;
+`
+
+const FormTitle = styled.h3`
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: left;
+    margin: 0;
+    font-family: var(--body-font);
+`
+
+const FormSubtitle = styled.p`
+    font-size: 0.8rem;
+    line-height: 1.35;
+    color: #8b949e;
+    text-align: left;
+    margin: 0;
+    font-family: var(--body-font);
+`
+
+const MessageForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    width: 100%;
+`
+
+/** Name + email sit side by side, stacking on narrow screens */
+const FieldGrid = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+
+    @media (max-width: 420px) {
+        grid-template-columns: 1fr;
+    }
+`
+
+const Field = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    width: 100%;
+`
+
+const FieldLabel = styled.label`
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #adb5bd;
+    font-family: var(--body-font);
+`
+
+/** Row of secondary actions below the form */
+const SecondaryActions = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 0.6rem;
+    width: 100%;
+
+    @media (max-width: 360px) {
+        flex-direction: column;
+    }
 `
 
 /** Social icons row */
