@@ -11,9 +11,7 @@ import styled from "styled-components";
 type ContactForm = { name: string; email: string; message: string };
 
 interface ContactPageUIProps {
-    followOcat: () => void;
     menu: boolean;
-    loading: boolean;
     form: ContactForm;
     sending: boolean;
     handleFormChange: (field: keyof ContactForm, value: string) => void;
@@ -40,8 +38,6 @@ const ContactInfo = () => (
 
 export default function ContactPageUI({
     menu,
-    followOcat,
-    loading,
     form,
     sending,
     handleFormChange,
@@ -151,38 +147,21 @@ export default function ContactPageUI({
                         </MessageForm>
                     </FormPanel>
 
-                    <SecondaryActions>
-                        {/* Book a meeting via Google Calendar */}
-                        <Button
-                            onClick={bookMeeting}
-                            leftIcon={<Icon icon={'calendar'} width="18px" height="18px" />}
-                            flex="1"
-                            variant="outline"
-                            color="#e6edf3"
-                            borderColor="#30363d"
-                            bg="transparent"
-                            _hover={{ bg: "#1b2026", borderColor: "#414a54" }}
-                            fontFamily="var(--body-font)"
-                            borderRadius="0.65rem"
-                        >
-                            Book a meeting
-                        </Button>
-
-                        <Button
-                            onClick={followOcat}
-                            isLoading={loading}
-                            flex="1"
-                            variant="outline"
-                            color="#e6edf3"
-                            borderColor="#30363d"
-                            bg="transparent"
-                            _hover={{ bg: "#1b2026", borderColor: "#414a54" }}
-                            fontFamily="var(--body-font)"
-                            borderRadius="0.65rem"
-                        >
-                            Follow
-                        </Button>
-                    </SecondaryActions>
+                    {/* Book a meeting via Google Calendar */}
+                    <Button
+                        onClick={bookMeeting}
+                        leftIcon={<Icon icon={'calendar'} width="18px" height="18px" />}
+                        width="100%"
+                        variant="outline"
+                        color="#e6edf3"
+                        borderColor="#30363d"
+                        bg="transparent"
+                        _hover={{ bg: "#1b2026", borderColor: "#414a54" }}
+                        fontFamily="var(--body-font)"
+                        borderRadius="0.65rem"
+                    >
+                        Book a meeting
+                    </Button>
                 </CardBody>
             </ContactCard>
 
@@ -325,17 +304,6 @@ const FieldLabel = styled.label`
     font-family: var(--body-font);
 `
 
-/** Row of secondary actions below the form */
-const SecondaryActions = styled.div`
-    display: flex;
-    flex-direction: row;
-    gap: 0.6rem;
-    width: 100%;
-
-    @media (max-width: 360px) {
-        flex-direction: column;
-    }
-`
 
 /** Social icons row */
 const SocialRow = styled.div`

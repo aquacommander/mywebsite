@@ -17,7 +17,6 @@ const EMPTY_FORM = { name: '', email: '', message: '' };
 export default function ContactPage() {
 
     const menu = useSelector((state: any) => state.app.menu);
-    const [loading, setLoading] = useState(false);
     const [sending, setSending] = useState(false);
     const [form, setForm] = useState(EMPTY_FORM);
     const toast = useToast();
@@ -63,39 +62,9 @@ export default function ContactPage() {
         window.open(CALENDAR_BOOKING_URL, '_blank', 'noopener,noreferrer');
     };
 
-    const followOcat = async () => {
-        const isFollowed = localStorage.getItem('isFollowed');
-        if (!!isFollowed) {
-            return toast({
-                title: 'Notification.',
-                description: "You already followed me",
-                status: 'warning',
-                duration: 9000,
-                isClosable: true,
-                position: 'top-right',
-            })
-        }
-        setLoading(true);
-        const { message, error } = await apis.followOcat();
-        setLoading(false);
-        toast({
-            title: 'Notification.',
-            description: message,
-            status: error ? 'warning' : 'success',
-            duration: 9000,
-            isClosable: true,
-            position: 'top-right',
-        })
-        if (!error) {
-            localStorage.setItem('isFollowed', 'true');
-        }
-    }
-
     return (
         <ContactPageUI
             menu={menu}
-            followOcat={followOcat}
-            loading={loading}
             form={form}
             sending={sending}
             handleFormChange={handleFormChange}
